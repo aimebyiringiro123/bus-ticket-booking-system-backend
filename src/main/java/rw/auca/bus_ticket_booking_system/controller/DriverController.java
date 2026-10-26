@@ -1,0 +1,88 @@
+package rw.auca.bus_ticket_booking_system.controller;
+
+import java.util.*;
+
+import java.util.Optional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import rw.auca.bus_ticket_booking_system.model.Driver;
+import rw.auca.bus_ticket_booking_system.service.DriverService;
+
+
+
+@RestController 
+@RequestMapping("/api/drivers")
+public class DriverController {
+
+    private final DriverService driverService;
+
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
+    }
+
+
+    @PostMapping ("/save")
+    public ResponseEntity<String> saveDriverEntity(@RequestBody Driver driver){
+        String message = driverService.saveDriver(driver);
+        return ResponseEntity.status(201).body(message);
+    }
+
+
+
+
+
+
+    @GetMapping("/all")
+    public List<Driver> findAll() {
+        return driverService.getAllDrivers();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getDriverById(@PathVariable UUID id){
+         Optional<Driver> opt = driverService.getDriverById(id);
+         if (opt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Driver with that id does not exist");
+        }
+        return ResponseEntity.ok(opt.get());
+    }
+
+
+
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateDriver(@PathVariable UUID id, @RequestBody Driver driver){
+        String message = driverService.updateDriver(id, driver);
+        if(message.equals("driver updated successfully")){
+            return ResponseEntity.ok(message);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+    }
+
+
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteDriver(@PathVariable UUID id) {
+        String message = driverService.deleteDriverById(id);
+        if (message.equals("The driver with that id does not exist")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+        return ResponseEntity.ok(message);
+    }
+    @DeleteMapping ("/deleteAll")
+    public ResponseEntity<String> deleteAllDrivers(){
+        driverService.deleteALlDrivers();
+        return ResponseEntity.ok("All drivers deleted successfully");
+    }
+
+}
