@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.bus_ticket_booking_system.model.Passenger;
@@ -84,6 +85,13 @@ public class PassengerController {
     public ResponseEntity<String> deleteAllPassengers(){
         passengerService.deleteAllPassengers();
         return ResponseEntity.ok("All passengers deleted successfully");
+    }
+
+
+
+    @GetMapping("/by-last-name")
+    public List<Passenger> byLastName(@RequestParam String lastName) {
+         return passengerService.findByLastname(lastName);
     }
 
     

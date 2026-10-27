@@ -19,7 +19,6 @@ public class PassengerService {
     }
 
 
-    //save
     public String savePassenger(Passenger passenger) {
         passenger.setId(null);
         passengerRepo.save(passenger);
@@ -30,7 +29,7 @@ public class PassengerService {
 
 
 
-    //get all
+    
     public List<Passenger> getAllPassengers() {
         return passengerRepo.findAll();
     }
@@ -38,7 +37,7 @@ public class PassengerService {
 
 
 
-    //find by id
+    
     public Optional<Passenger> getPassengerById(UUID id) {
         return passengerRepo.findById(id);
     }
@@ -46,7 +45,7 @@ public class PassengerService {
 
 
 
-    //update by id
+    
     public String UpdatePassenger(UUID id, Passenger passenger) {
         Optional<Passenger> existingPassenger = passengerRepo.findById(id);
         if (existingPassenger.isPresent()) {
@@ -68,7 +67,7 @@ public class PassengerService {
 
 
 
-    //delete by id
+    
     public String deletePassengerById(UUID id) {
         if(!passengerRepo.existsById(id)){
             return "Passenger with that id does not exist";
@@ -81,10 +80,16 @@ public class PassengerService {
 
     
 
-    //delete all
+
     public String deleteAllPassengers(){
         passengerRepo.deleteAll();
         return "All passengers deleted successfully";
+    }
+
+
+
+    public List<Passenger> findByLastname(String lastName) {
+        return passengerRepo.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
 
 }
