@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.bus_ticket_booking_system.model.Booking;
+import rw.auca.bus_ticket_booking_system.model.BookingStatus;
 import rw.auca.bus_ticket_booking_system.service.BookingService;
 
 @RestController 
@@ -85,5 +87,10 @@ public class BookingController {
         return ResponseEntity.ok("All bookings deleted successfully");
     }
 
+    @GetMapping("/by-status")
+    public ResponseEntity<List<Booking>> getBookingByStatus(@RequestParam BookingStatus status){
+        List<Booking> bookings = bookingService.getBookingsByStatus(status);
+        return ResponseEntity.ok(bookings);
+    }
 
 }

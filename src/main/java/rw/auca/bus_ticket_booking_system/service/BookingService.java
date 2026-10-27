@@ -1,11 +1,13 @@
 package rw.auca.bus_ticket_booking_system.service;
 
-import java.util.UUID;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import rw.auca.bus_ticket_booking_system.model.Booking;
+import rw.auca.bus_ticket_booking_system.model.BookingStatus;
 import rw.auca.bus_ticket_booking_system.repository.BookingRepository;
 
 
@@ -76,6 +78,11 @@ public class BookingService {
     public String deleteAllBookings(){
         bookingRepo.deleteAll();
         return "All bookings deleted successfully";
+    }
+
+
+    public List<Booking>getBookingsByStatus(BookingStatus status){
+        return bookingRepo.findByStatusOrderByTravelDateAsc(status);
     }
 
 
