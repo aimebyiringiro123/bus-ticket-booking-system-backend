@@ -1,5 +1,6 @@
 package rw.auca.bus_ticket_booking_system.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -90,6 +91,12 @@ public class BookingController {
     @GetMapping("/by-status")
     public ResponseEntity<List<Booking>> getBookingByStatus(@RequestParam BookingStatus status){
         List<Booking> bookings = bookingService.getBookingsByStatus(status);
+        return ResponseEntity.ok(bookings);
+    }
+
+    @GetMapping("/between")
+    public ResponseEntity<List<Booking>> getBookingByDate(@RequestParam LocalDate start, @RequestParam LocalDate end){
+        List<Booking> bookings = bookingService.getBookingByDate(start, end);
         return ResponseEntity.ok(bookings);
     }
 

@@ -1,5 +1,6 @@
 package rw.auca.bus_ticket_booking_system.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -83,6 +84,11 @@ public class BookingService {
 
     public List<Booking>getBookingsByStatus(BookingStatus status){
         return bookingRepo.findByStatusOrderByTravelDateAsc(status);
+    }
+
+
+    public List<Booking> getBookingByDate(LocalDate start, LocalDate end){
+        return bookingRepo.findByTravelDateBetweenOrderByTravelDateAsc(start, end);
     }
 
 

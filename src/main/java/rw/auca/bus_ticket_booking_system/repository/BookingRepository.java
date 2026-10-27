@@ -1,5 +1,6 @@
 package rw.auca.bus_ticket_booking_system.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,5 +14,7 @@ import rw.auca.bus_ticket_booking_system.model.BookingStatus;
 public interface BookingRepository extends JpaRepository<Booking, UUID>{
 
     List<Booking>findByStatusOrderByTravelDateAsc(BookingStatus status);
+
+    List <Booking> findByTravelDateBetweenOrderByTravelDateAsc(LocalDate start, LocalDate end);
 
 }
