@@ -26,7 +26,24 @@ public class BookingService {
     
 
     public String saveBooking(Booking booking){
+
+        if(booking.getTravelDate() == null){
+            return "booking date is required";
+        }
+
+        if(booking.getTravelDate().isBefore(LocalDate.now())){
+            return "Booking date cannot be in the past";
+        }
+        if (booking.getDriver() != null && booking.getDriver().getId() != null
+            && bookingRepo.existsByDriverIdAndTravelDateAndStatusNot(
+                    booking.getDriver().getId(),
+                    booking.getTravelDate(),
+                    BookingStatus.CANCELLED)) {
+        return "Driver already has a trip on that date";
+       }
+
         booking.setId(null);
+        booking.setStatus(BookingStatus.RESERVED);
         bookingRepo.save(booking);
         return "Booking saved successfully";
     }

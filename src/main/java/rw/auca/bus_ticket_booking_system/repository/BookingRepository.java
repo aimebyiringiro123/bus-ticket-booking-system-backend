@@ -17,4 +17,8 @@ public interface BookingRepository extends JpaRepository<Booking, UUID>{
 
     List <Booking> findByTravelDateBetweenOrderByTravelDateAsc(LocalDate start, LocalDate end);
 
+    boolean existsByDriverIdAndTravelDateAndStatusNot(UUID driverId, LocalDate date, BookingStatus status);
+
+    
+
 }

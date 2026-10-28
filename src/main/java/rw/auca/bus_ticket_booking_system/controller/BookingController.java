@@ -35,6 +35,17 @@ public class BookingController {
     @PostMapping ("/save")
     public ResponseEntity<String> saveBooking(@RequestBody Booking booking){
         String message = bookingService.saveBooking(booking);
+
+        if(message.equals("Booking date cannot be in the past") || message.equals("booking date is required")){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        }
+
+        if(message.equals("Driver already has a trip on that date")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        }
+        if(message.equals("Booking saved successfully")){
+            return ResponseEntity.ok(message);
+        }
         return ResponseEntity.status(201).body(message);
     }
 
