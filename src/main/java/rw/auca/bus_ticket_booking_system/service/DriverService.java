@@ -67,6 +67,10 @@ public class DriverService {
         return "All drivers deleted successfully";
     }
 
+    public List<Driver> findDriversByRoute(String name){
+        return driverRepo.findDriversByRouteName(name);
+    }
+
 
 
 }

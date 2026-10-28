@@ -1,8 +1,9 @@
 package rw.auca.bus_ticket_booking_system.controller;
 
-import java.util.*;
-
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.bus_ticket_booking_system.model.Driver;
 import rw.auca.bus_ticket_booking_system.service.DriverService;
+
 
 
 
@@ -84,5 +87,16 @@ public class DriverController {
         driverService.deleteALlDrivers();
         return ResponseEntity.ok("All drivers deleted successfully");
     }
+
+
+    @GetMapping("/by-route")
+    public ResponseEntity<?> findDriverByRoute(@RequestParam String name){
+        List<Driver> drivers = driverService.findDriversByRoute(name);
+        if (drivers.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No drivers found for the given route");
+        }
+        return ResponseEntity.ok(drivers);
+    }
+    
 
 }
