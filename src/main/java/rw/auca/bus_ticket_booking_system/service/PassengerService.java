@@ -7,15 +7,18 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import rw.auca.bus_ticket_booking_system.model.Passenger;
+import rw.auca.bus_ticket_booking_system.repository.DriverRepository;
 import rw.auca.bus_ticket_booking_system.repository.PassengerRepository;
 
 @Service 
 public class PassengerService {
 
     private final PassengerRepository passengerRepo;
+    private final DriverRepository driverRepo;
 
-    public PassengerService(PassengerRepository passengerRepo) {
+    public PassengerService(PassengerRepository passengerRepo, DriverRepository driverRepo) {
         this.passengerRepo = passengerRepo;
+        this.driverRepo = driverRepo;
     }
 
 
@@ -90,6 +93,10 @@ public class PassengerService {
 
     public List<Passenger> findByLastname(String lastName) {
         return passengerRepo.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
+
+    public List<Passenger> findPassengersByDriverId(UUID driverId){
+        return passengerRepo.findPassengersByDriverId(driverId);
     }
 
 }

@@ -94,6 +94,15 @@ public class PassengerController {
          return passengerService.findByLastname(lastName);
     }
 
+    @GetMapping("/of-driver/{driverId}")
+    public ResponseEntity<?> getPassengerByDriverId(@PathVariable UUID driverId){
+        List<Passenger> passengers = passengerService.findPassengersByDriverId(driverId);
+        if(passengers.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No passengers found for the given driver ID");
+        }
+        return ResponseEntity.ok(passengers);
+    }
+
     
 
 }
