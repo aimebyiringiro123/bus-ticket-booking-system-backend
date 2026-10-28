@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import rw.auca.bus_ticket_booking_system.model.Bus;
 import rw.auca.bus_ticket_booking_system.service.BusService;
 
+
 @RestController 
 @RequestMapping ("/api/buses")
 public class BusController {
@@ -84,6 +85,18 @@ public class BusController {
         busService.deleteAllBuses();
         return ResponseEntity.ok("All buses deleted successfully");
     }
+
+@GetMapping("/free")
+public ResponseEntity<?> findBusesWithoutDrivers() {
+    List<Bus> buses = busService.findBusesWithoutDrivers();
+    if (buses.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No buses found without drivers");
+    }
+    return ResponseEntity.ok(buses);
+}
+
+
+
 
 
 }

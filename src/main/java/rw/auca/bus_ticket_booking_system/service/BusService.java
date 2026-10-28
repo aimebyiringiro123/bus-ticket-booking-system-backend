@@ -77,6 +77,10 @@ public class BusService {
         return "All buses deleted successfully";
     }
 
+    public List<Bus> findBusesWithoutDrivers() {
+        return busRepo.findBusesWithoutDrivers();
+    }
+
 
 
 }
