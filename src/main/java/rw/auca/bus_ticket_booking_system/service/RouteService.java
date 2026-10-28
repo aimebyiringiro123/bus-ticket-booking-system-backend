@@ -78,6 +78,12 @@ public class RouteService {
         return "All routes deleted successfully";
     }
 
+    
+
+    public List<Route> findRouteWithoutDrivers(){
+        return routeRepo.findRoutesWithoutDrivers();
+    }
+
 
 }
     

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import rw.auca.bus_ticket_booking_system.model.Route;
 import rw.auca.bus_ticket_booking_system.service.RouteService;
 
+
 @RestController 
 @RequestMapping ("/api/routes")
 public class RouteController {
@@ -84,6 +85,17 @@ public class RouteController {
         routeService.deleteAllRoutes();
         return ResponseEntity.ok("All routes deleted successfully");
     }
+
+
+    @GetMapping("/unused")
+    public ResponseEntity<?> findRouteWithoutDriver(){
+        List<Route> routesWithoutDrivers = routeService.findRouteWithoutDrivers();
+        if (routesWithoutDrivers.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No routes without drivers found");
+        }
+        return ResponseEntity.ok(routesWithoutDrivers);
+    }
+    
 
 
 }
