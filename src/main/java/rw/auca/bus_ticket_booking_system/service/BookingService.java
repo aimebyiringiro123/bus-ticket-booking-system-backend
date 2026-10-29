@@ -110,4 +110,30 @@ public class BookingService {
 
 
 
+    public String changeStatus(UUID id, BookingStatus newStatus){
+        Optional<Booking> existingBooking = bookingRepo.findById(id);
+        if(existingBooking.isEmpty()){
+            return "Booking with that id does not exit";
+        }
+        Booking booking = existingBooking.get();
+        BookingStatus current = booking.getStatus();
+
+        boolean allowed = false;
+
+        if(current == BookingStatus.RESERVED){
+            allowed = newStatus == BookingStatus.PAID || newStatus == BookingStatus.CANCELLED;
+        }
+        else if(current == BookingStatus.PAID){
+            allowed = newStatus == BookingStatus.CANCELLED || newStatus == BookingStatus.BOARDED;
+        }
+
+        if(!allowed){
+            return "Cannot change status from " + current + " to " + newStatus;
+        }
+
+        booking.setStatus(newStatus);
+        bookingRepo.save(booking);
+        return "Booking status updated successfully";
+
+    }
 }

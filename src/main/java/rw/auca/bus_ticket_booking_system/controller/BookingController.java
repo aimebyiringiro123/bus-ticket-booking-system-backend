@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -110,5 +111,23 @@ public class BookingController {
         List<Booking> bookings = bookingService.getBookingByDate(start, end);
         return ResponseEntity.ok(bookings);
     }
+
+
+
+
+
+
+    @PatchMapping ("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable UUID id, @RequestParam BookingStatus status){
+        String message = bookingService.changeStatus(id, status);
+        if(message.equals("Booking with that id does not exit")){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+        if(message.startsWith("Cannot change status from")){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        }
+        return ResponseEntity.ok(message);
+    }
+    
 
 }
