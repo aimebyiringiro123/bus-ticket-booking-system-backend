@@ -6,20 +6,24 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import rw.auca.bus_ticket_booking_system.model.Bus;
 import rw.auca.bus_ticket_booking_system.model.Driver;
 import rw.auca.bus_ticket_booking_system.model.Route;
 import rw.auca.bus_ticket_booking_system.repository.DriverRepository;
 import rw.auca.bus_ticket_booking_system.repository.RouteRepository;
+import rw.auca.bus_ticket_booking_system.repository.BusRepository;
 
 @Service 
 public class DriverService {
 
     private final DriverRepository driverRepo;
     private final RouteRepository routeRepo;
+    private final BusRepository busRepo;
 
-    public DriverService(DriverRepository driverRepo, RouteRepository routeRepo) {
+    public DriverService(DriverRepository driverRepo, RouteRepository routeRepo, BusRepository busRepo) {
         this.driverRepo = driverRepo;
         this.routeRepo = routeRepo;
+        this.busRepo = busRepo;
     }
 
 
@@ -76,10 +80,11 @@ public class DriverService {
     }
 
 
-    
+
 
     public String assignRouteToDriver(UUID driverId, UUID routeId){
         Driver driver = driverRepo.findById(driverId).orElse(null);
+
         if (driver == null) {
             return "Driver not found";
         }
@@ -90,15 +95,38 @@ public class DriverService {
         if(driver.getRoutes().contains(route)){
             return "Driver is already assigned to this route";
         }
-        
-
+    
         driver.getRoutes().add(route);
         driverRepo.save(driver);
         return "Route assigned to driver successfully";
 
-
     }
 
 
+
+     public String changeBus(UUID driverId, int busNumber) {
+        Optional<Driver> driverOpt = driverRepo.findById(driverId);
+        if (driverOpt.isEmpty()) {
+            return "The driver with that id does not exist";
+        }
+
+        Optional<Bus> busOpt = busRepo.findByBusNumber(busNumber);
+        if (busOpt.isEmpty()) {
+            return "The bus with that busNumber does not exist";
+        }
+
+        if (driverRepo.existsByBusAndIdNot(busOpt.get(), driverId)) {
+            return "That bus is taken by another driver";
+        }
+
+        Driver driver = driverOpt.get();
+        driver.setBus(busOpt.get());     
+        driverRepo.save(driver);
+        return "Bus changed successfully";
+    }
+
+
+
+    
 
 }

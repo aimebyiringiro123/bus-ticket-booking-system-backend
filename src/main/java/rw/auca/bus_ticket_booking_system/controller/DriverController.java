@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -110,6 +111,20 @@ public class DriverController {
         }
         return ResponseEntity.ok(message);
     }
+
+
+    @PatchMapping("/{driverId}/bus")
+    public ResponseEntity<String> changeBus(@PathVariable UUID driverId, @RequestParam int busNumber) {
+    String message = driverService.changeBus(driverId, busNumber);
+
+    if (message.equals("The driver with that id does not exist") || message.equals("The bus with that busNumber does not exist")) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    }
+    if (message.equals("That bus is taken by another driver")) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+    }
+    return ResponseEntity.ok(message);
+}
     
 
 }

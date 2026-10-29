@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import rw.auca.bus_ticket_booking_system.model.Bus;
 import rw.auca.bus_ticket_booking_system.model.Driver;
 
 public interface DriverRepository extends JpaRepository<Driver, UUID>{
@@ -16,6 +17,6 @@ public interface DriverRepository extends JpaRepository<Driver, UUID>{
 
     List<Driver> findDriversByRouteName(@Param("name") String name);
 
-            
+    boolean existsByBusAndIdNot(Bus bus, UUID id);
 
 }
