@@ -97,6 +97,19 @@ public class DriverController {
         }
         return ResponseEntity.ok(drivers);
     }
+
+
+    @PutMapping ("/{driverId}/routes/{routeId}")
+    public ResponseEntity<?> assignRouteToDriver(@PathVariable UUID driverId, @PathVariable UUID routeId){
+        String message  = driverService.assignRouteToDriver(driverId, routeId);
+        if (message.equals("Driver not found") || message.equals("Route not found")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+
+        } else if (message.equals("Driver is already assigned to this route")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        }
+        return ResponseEntity.ok(message);
+    }
     
 
 }

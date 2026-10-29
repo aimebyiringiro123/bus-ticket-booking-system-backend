@@ -7,15 +7,19 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import rw.auca.bus_ticket_booking_system.model.Driver;
+import rw.auca.bus_ticket_booking_system.model.Route;
 import rw.auca.bus_ticket_booking_system.repository.DriverRepository;
+import rw.auca.bus_ticket_booking_system.repository.RouteRepository;
 
 @Service 
 public class DriverService {
 
     private final DriverRepository driverRepo;
+    private final RouteRepository routeRepo;
 
-    public DriverService(DriverRepository driverRepo) {
+    public DriverService(DriverRepository driverRepo, RouteRepository routeRepo) {
         this.driverRepo = driverRepo;
+        this.routeRepo = routeRepo;
     }
 
 
@@ -69,6 +73,30 @@ public class DriverService {
 
     public List<Driver> findDriversByRoute(String name){
         return driverRepo.findDriversByRouteName(name);
+    }
+
+
+    
+
+    public String assignRouteToDriver(UUID driverId, UUID routeId){
+        Driver driver = driverRepo.findById(driverId).orElse(null);
+        if (driver == null) {
+            return "Driver not found";
+        }
+        Route route = routeRepo.findById(routeId).orElse(null);
+        if (route == null) {
+            return "Route not found";
+        }
+        if(driver.getRoutes().contains(route)){
+            return "Driver is already assigned to this route";
+        }
+        
+
+        driver.getRoutes().add(route);
+        driverRepo.save(driver);
+        return "Route assigned to driver successfully";
+
+
     }
 
 
