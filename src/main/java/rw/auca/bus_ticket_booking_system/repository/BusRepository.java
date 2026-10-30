@@ -1,6 +1,7 @@
 package rw.auca.bus_ticket_booking_system.repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,8 @@ public interface BusRepository extends JpaRepository<Bus, UUID> {
     @Query("SELECT b FROM Bus b " +
        "WHERE NOT EXISTS (SELECT d FROM Driver d WHERE d.bus = b) " +
        "ORDER BY b.busNumber")
+
     public List<Bus> findBusesWithoutDrivers();
+    Optional<Bus> findByBusNumber(int busNumber);
 
 }

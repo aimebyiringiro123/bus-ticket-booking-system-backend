@@ -21,6 +21,7 @@ public class Bus {
     private UUID id;
 
     private int busNumber;
+    
     private String plateNumber; 
 
 

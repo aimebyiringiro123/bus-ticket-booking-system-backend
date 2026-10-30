@@ -1,0 +1,563 @@
+{
+  "info": {
+    "name": "bus-ticket-booking-system-midterm",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Part A - CRUD",
+      "item": [
+        {
+          "name": "A2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"travelDate\": \"2026-11-20\",\n  \"status\": \"RESERVED\",\n  \"seatNumber\": 12,\n  \"destination\": \"Musanze\",\n  \"passenger\": {\n    \"id\": \"{{passengerId}}\"\n  },\n  \"driver\": {\n    \"id\": \"{{driverId}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+
+
+    {
+      "name": "Part B - Derived queries",
+      "item": [
+        {
+          "name": "B1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/passengers/by-last-name?lastName=ingabire",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "passengers",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "ingabire"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "B2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/by-status?status=RESERVED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "RESERVED"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "B3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/between?start=2026-10-01&end=2026-10-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-31"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+
+
+    {
+      "name": "Part C - JPQL joins",
+      "item": [
+        {
+          "name": "C1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/drivers/by-route?name=musanze",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "drivers",
+                "by-route"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "musanze"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "C2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/buses/free",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "buses",
+                "free"
+              ]
+            }
+          }
+        },
+        {
+          "name": "C3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/routes/unused",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "routes",
+                "unused"
+              ]
+            }
+          }
+        },
+        {
+          "name": "C4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/passengers/of-driver/{{driverId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "passengers",
+                "of-driver",
+                "{{driverId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+
+
+    {
+      "name": "Part D - Business rules",
+      "item": [
+        {
+          "name": "D1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"travelDate\": \"2026-01-10\",\n  \"status\": \"RESERVED\",\n  \"seatNumber\": 12,\n  \"destination\": \"Musanze\",\n  \"passenger\": {\n    \"id\": \"{{passengerId}}\"\n  },\n  \"driver\": {\n    \"id\": \"{{driverId}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/{{bookingId}}/status?status=PAID",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "{{bookingId}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D3",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/drivers/{{driverId}}/routes/{{routeId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}",
+                "routes",
+                "{{routeId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D4",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/drivers/{{driverId}}/bus?busNumber=4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}",
+                "bus"
+              ],
+              "query": [
+                {
+                  "key": "busNumber",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+
+
+
+    {
+      "name": "Part E - Luggage",
+      "item": [
+        {
+          "name": "E1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8003/api/luggage-items/save?bookingId={{boardedBookingId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "luggage-items",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "bookingId",
+                  "value": "{{boardedBookingId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemName\": \"Suitcase\",\n  \"description\": \"Blue hard-shell suitcase\",\n  \"weightKg\": 18\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "E2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/luggage-items/passenger/{{nationalId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "luggage-items",
+                "passenger",
+                "{{nationalId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "E3",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/luggage-items/delete/{{luggageId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "luggage-items",
+                "delete",
+                "{{luggageId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+
+
+
+    {
+      "name": "Part F - Reports",
+      "item": [
+        {
+          "name": "F1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/stats/by-status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "stats",
+                "by-status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "F2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/cancel-day?driverId={{driverId}}&date=2026-10-20",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "driverId",
+                  "value": "{{driverId}}"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-10-20"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+
+
+    {
+      "name": "Bonus",
+      "item": [
+        {
+          "name": "Bonus-Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/dashboard/summary",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "dashboard",
+                "summary"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Bonus-Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8003/api/bookings/page?page=0&size=5&sort=travelDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8003",
+              "path": [
+                "api",
+                "bookings",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "travelDate,desc"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
