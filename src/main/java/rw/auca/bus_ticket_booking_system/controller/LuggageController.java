@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +54,18 @@ public class LuggageController {
     @GetMapping("/passenger/{nationalId}")
     public List<Luggage> history(@PathVariable String nationalId) {
         return luggageService.findHistory(nationalId);
+    }
+
+
+
+     @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable UUID id) {
+        String message = luggageService.delete(id);
+
+        if (message.equals("The luggage with that id does not exist")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+        return ResponseEntity.ok(message);
     }
 
 

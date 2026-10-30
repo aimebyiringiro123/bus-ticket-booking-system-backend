@@ -55,7 +55,13 @@ public class LuggageService {
 
 
 
-    
+    public String delete(UUID id) {
+        if (!luggageRepository.existsById(id)) {
+            return "The luggage with that id does not exist";
+        }
+        luggageRepository.deleteById(id);
+        return "Luggage deleted successfully";
+    }
 
 
 }

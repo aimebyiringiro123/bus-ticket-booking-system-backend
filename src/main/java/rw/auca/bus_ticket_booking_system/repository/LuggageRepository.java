@@ -18,5 +18,5 @@ public interface LuggageRepository  extends JpaRepository<Luggage, UUID> {
            "ORDER BY l.checkedDate DESC")
     List<Luggage> findHistoryByNationalId(@Param("nationalId") String nationalId);
     
-    
+    boolean existsByBookingId(UUID bookingId);
 }
