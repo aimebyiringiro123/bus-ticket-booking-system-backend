@@ -128,7 +128,7 @@ public class BookingController {
         }
         return ResponseEntity.ok(message);
     }
-        
+
 
     @GetMapping("/stats/by-status")
     public List<Object[]> statsByStatus() {
@@ -136,5 +136,12 @@ public class BookingController {
     }
     
 
+
+
+    @PatchMapping("/cancel-day")
+    public String cancelDay(@RequestParam UUID driverId, @RequestParam String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return bookingService.cancelDay(driverId, localDate);
+    } 
 }
     

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import rw.auca.bus_ticket_booking_system.model.Booking;
 import rw.auca.bus_ticket_booking_system.model.BookingStatus;
 import rw.auca.bus_ticket_booking_system.repository.BookingRepository;
@@ -138,6 +139,16 @@ public class BookingService {
     }
 
     public List<Object[]> countByStatus() {
-    return bookingRepo.countByStatus();
-}
+        return bookingRepo.countByStatus();
+    }
+
+
+
+
+    @Transactional
+    public String cancelDay(UUID driverId, LocalDate date) {
+         int count = bookingRepo.cancelDay(
+            driverId, date, BookingStatus.CANCELLED, BookingStatus.BOARDED);
+         return count + " bookings cancelled";
+    }
 }
