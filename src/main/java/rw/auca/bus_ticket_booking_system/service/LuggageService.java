@@ -48,4 +48,14 @@ public class LuggageService {
     public List<Luggage> findAll() {
         return luggageRepository.findAll();
     }
+
+    public List<Luggage> findHistory(String nationalId) {
+        return luggageRepository.findHistoryByNationalId(nationalId);
+    }
+
+
+
+    
+
+
 }
