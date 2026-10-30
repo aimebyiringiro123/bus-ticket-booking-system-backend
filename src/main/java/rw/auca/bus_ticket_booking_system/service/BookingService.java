@@ -136,4 +136,8 @@ public class BookingService {
         return "Booking status updated successfully";
 
     }
+
+    public List<Object[]> countByStatus() {
+    return bookingRepo.countByStatus();
+}
 }

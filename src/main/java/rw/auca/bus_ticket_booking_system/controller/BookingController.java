@@ -128,6 +128,13 @@ public class BookingController {
         }
         return ResponseEntity.ok(message);
     }
+        
+
+    @GetMapping("/stats/by-status")
+    public List<Object[]> statsByStatus() {
+        return bookingService.countByStatus();
+    }
     
 
 }
+    
