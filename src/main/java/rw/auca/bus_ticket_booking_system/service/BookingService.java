@@ -14,6 +14,7 @@ import rw.auca.bus_ticket_booking_system.repository.BookingRepository;
 
 
 
+
 @Service
 public class BookingService {
 
@@ -151,4 +152,10 @@ public class BookingService {
             driverId, date, BookingStatus.CANCELLED, BookingStatus.BOARDED);
          return count + " bookings cancelled";
     }
+
+
+    
+
+
+    
 }

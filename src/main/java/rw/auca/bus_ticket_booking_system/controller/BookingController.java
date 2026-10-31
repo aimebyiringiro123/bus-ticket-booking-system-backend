@@ -143,5 +143,6 @@ public class BookingController {
         LocalDate localDate = LocalDate.parse(date);
         return bookingService.cancelDay(driverId, localDate);
     } 
+    
 }
     
