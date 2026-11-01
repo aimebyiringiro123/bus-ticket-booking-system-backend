@@ -34,7 +34,7 @@ Route, Bus, Driver, Passenger, Booking, Luggage, and the enum `BookingStatus` (R
 
 3. **Create the database** in PostgreSQL:
    ```sql
-   CREATE DATABASE bus_ticket_booking_system;
+   CREATE DATABASE bus_tick_db;
    ```
 
 4. **Configure** `src/main/resources/application.properties` with your own database name, username and password:
