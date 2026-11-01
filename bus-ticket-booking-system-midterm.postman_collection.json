@@ -522,40 +522,6 @@
               ]
             }
           }
-        },
-        {
-          "name": "Bonus-Page",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8003/api/bookings/page?page=0&size=5&sort=travelDate,desc",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8003",
-              "path": [
-                "api",
-                "bookings",
-                "page"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "5"
-                },
-                {
-                  "key": "sort",
-                  "value": "travelDate,desc"
-                }
-              ]
-            }
-          }
         }
       ]
     }
