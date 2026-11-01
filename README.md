@@ -28,7 +28,7 @@ Route, Bus, Driver, Passenger, Booking, Luggage, and the enum `BookingStatus` (R
 
 2. **Clone the repository:**
    ```
-   git clone https://github.com/<your-username>/bus-ticket-booking-system-backend.git
+   git clone https://github.com/aimebyiringiro123/bus-ticket-booking-system-backend.git
    cd bus-ticket-booking-system-backend
    ```
 
