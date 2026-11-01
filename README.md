@@ -84,4 +84,4 @@ The collection has one request per requirement, named by its ID (A2, B1, C4, D2,
 | F | F1 | `GET /api/bookings/stats/by-status` |
 | F | F2 | `PATCH /api/bookings/cancel-day?driverId=&date=` |
 | Bonus | +5 | `GET /api/dashboard/summary` |
-| Bonus | +5 | `GET /api/bookings/page?page=0&size=5&sort=travelDate,desc` |
+
